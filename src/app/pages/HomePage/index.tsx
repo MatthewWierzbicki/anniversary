@@ -1,25 +1,26 @@
-import * as React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { NavBar } from 'app/components/NavBar';
-import { Masthead } from './Masthead';
-import { Features } from './Features';
-import { PageWrapper } from 'app/components/PageWrapper';
+import React, { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
+import { IntroScript } from 'app/components/IntroScript'
+import { ParticlesWrapper } from 'app/components/ParticlesWrapper/Loadable'
 
-export function HomePage() {
+enum Stage {
+  Welcome,
+  Script,
+  Outro,
+}
+
+export const HomePage = () => {
+  const [stage, setStage] = useState<Stage>(Stage.Script)
   return (
     <>
       <Helmet>
         <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React Boilerplate application homepage"
-        />
+        <meta name="description" content="sylvia" />
       </Helmet>
-      <NavBar />
-      <PageWrapper>
-        <Masthead />
-        <Features />
-      </PageWrapper>
+      {stage === Stage.Script && (
+        <IntroScript onComplete={() => setStage(Stage.Outro)} />
+      )}
+      <ParticlesWrapper />
     </>
-  );
+  )
 }
