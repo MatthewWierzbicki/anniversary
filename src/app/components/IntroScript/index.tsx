@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { FadeText } from '../FadeText'
+import { CountUp } from '../CountUp'
+import { useAudio } from 'utils/hooks/useAudio'
 
 const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -12,15 +14,16 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }))
 
-const script = [
-  'january 25th 2020',
-  'has it really been that long?',
-  'happy 2 years',
+const script: string[] = [
+  'Hi there',
+  `I'm here to tell you a story`,
+  `About a boy and girl who fell in love`,
+  'It starts a little like this',
 ]
 interface IntroScriptProps {
   onComplete: () => void
 }
-
+// Space song beach house playing
 export const IntroScript = ({ onComplete }: IntroScriptProps) => {
   const classes = useStyles()
   const [scriptIndex, setScriptIndex] = useState(0)
@@ -30,11 +33,11 @@ export const IntroScript = ({ onComplete }: IntroScriptProps) => {
   return (
     <>
       <Box className={classes.root}>
+        {/* <CountUp /> */}
         <FadeText
-          text={script[scriptIndex]}
+          child={script[scriptIndex]}
           onComplete={() => {
             setScriptIndex(scriptIndex + 1)
-            console.log('complete')
           }}
         />
       </Box>

@@ -20,21 +20,21 @@ enum FadeState {
   FADE_IN,
   FADE_OUT,
 }
+
 interface FadeTextProps {
-  text: string
+  child: string
   onComplete: () => void
 }
-export const FadeText = ({ text, onComplete }: FadeTextProps) => {
+export const FadeText = ({ child, onComplete }: FadeTextProps) => {
   const classes = useStyles()
-  const [fade, setfade] = useState<FadeState>(FadeState.FADE_IN)
-
+  const [fade, setFade] = useState<FadeState>(FadeState.FADE_IN)
   useEffect(() => {
     const timeout = setInterval(
       () => {
         if (fade === FadeState.FADE_IN) {
-          setfade(FadeState.FADE_OUT)
+          setFade(FadeState.FADE_OUT)
         } else {
-          setfade(FadeState.FADE_IN)
+          setFade(FadeState.FADE_IN)
         }
       },
       fade === FadeState.FADE_IN ? 2000 : 4000,
@@ -42,7 +42,9 @@ export const FadeText = ({ text, onComplete }: FadeTextProps) => {
     return () => {
       clearInterval(timeout)
       if (fade === FadeState.FADE_OUT) {
-        setTimeout(() => onComplete(), 2000)
+        setTimeout(() => {
+          onComplete()
+        }, 2000)
       }
     }
   }, [fade, onComplete])
@@ -51,10 +53,11 @@ export const FadeText = ({ text, onComplete }: FadeTextProps) => {
     [classes.fadeOut]: fade === FadeState.FADE_IN,
     [classes.fadeIn]: fade === FadeState.FADE_OUT,
   })
-
   return (
-    <Typography className={fadeClasses} variant="h1">
-      {text}
-    </Typography>
+    <>
+      <Typography className={fadeClasses} variant="h2">
+        {child}
+      </Typography>
+    </>
   )
 }
