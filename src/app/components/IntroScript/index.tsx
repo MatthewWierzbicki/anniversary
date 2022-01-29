@@ -28,7 +28,8 @@ export const IntroScript = ({ onComplete }: IntroScriptProps) => {
   const classes = useStyles()
   const [scriptIndex, setScriptIndex] = useState(0)
   useEffect(() => {
-    if (scriptIndex > script.length) onComplete()
+    console.log(scriptIndex > script.length)
+    if (scriptIndex === script.length) onComplete()
   }, [onComplete, scriptIndex])
   return (
     <>

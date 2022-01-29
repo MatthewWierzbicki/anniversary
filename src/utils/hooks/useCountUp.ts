@@ -3,7 +3,8 @@ import { timeDiffCalc } from 'utils/dates'
 
 export const useCountUp = () => {
   const [today, setDate] = useState(Date.now()) // Save the current date to be able to trigger an update
-  const anniversary = new Date('2020-01-25T00:00:00.000Z').getDate() // The date of the event
+  const anniversary = new Date('2020-01-25T00:00:00.000Z').getTime() // The date of the event
+  console.log(today, anniversary)
   useEffect(() => {
     const timer = setInterval(() => {
       // Creates an interval which will update the current data every minute

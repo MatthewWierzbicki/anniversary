@@ -399,13 +399,13 @@ module.exports = function (webpackEnv) {
                 and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
               },
             },
-          //   {
-          //     test: /\.mp3$/,
-          //     loader: 'file-loader',
-          //     options: {
-          //         name: '[path][name].[ext]'
-          //     }
-          // },
+            {
+              test: /\.(mp3|wav)$/,
+              loader: require.resolve('file-loader'),
+              options: {
+                  name:'static/audio/[name].[hash].[ext]'
+              }
+            },
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {

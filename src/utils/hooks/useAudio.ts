@@ -1,26 +1,27 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 export const useAudio = (url: string) => {
-  const [play, setPlay] = useState(false)
-  const audioEl = useRef(new Audio(url))
+  const [audio] = useState(new Audio(url))
+  const [playing, setPlaying] = useState(false)
+
+  const start = () => {
+    setPlaying(true)
+  }
+
+  const stop = () => {
+    setPlaying(false)
+  }
 
   useEffect(() => {
-    const audio = audioEl.current
-    const onPlay = () => audio.play()
+    playing ? audio.play() : audio.pause()
+  }, [audio, playing])
 
-    if (audio && play) {
-      audio.addEventListener('canplaythrough', onPlay)
-    }
-
+  useEffect(() => {
+    audio.addEventListener('ended', () => setPlaying(false))
     return () => {
-      if (audio) {
-        audio.pause() // to enable garbage collection
-        audio.removeEventListener('canplaythrough', onPlay)
-      }
+      audio.removeEventListener('ended', () => setPlaying(false))
     }
-  }, [play])
+  }, [audio])
 
-  const start: () => void = () => setPlay(true)
-  const stop: () => void = () => setPlay(false)
-  return { start, stop }
+  return { playing, start, stop }
 }

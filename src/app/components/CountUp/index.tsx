@@ -21,13 +21,13 @@ export const CountUp = () => {
   const { difference } = useCountUp()
   console.log({ difference })
   return (
-    <>
+    <Box className={classes.root}>
       <Typography className={classes.subtitle} variant="h2">
         We've been together for
       </Typography>
       <Typography className={classes.subtitle} variant="h2">
         {difference}
       </Typography>
-    </>
+    </Box>
   )
 }
