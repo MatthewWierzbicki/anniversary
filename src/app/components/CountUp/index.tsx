@@ -19,7 +19,6 @@ const useStyles = makeStyles(({ palette }) => ({
 export const CountUp = () => {
   const classes = useStyles()
   const { difference } = useCountUp()
-  console.log({ difference })
   return (
     <Box className={classes.root}>
       <Typography className={classes.subtitle} variant="h2">

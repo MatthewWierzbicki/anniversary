@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { FadeText } from '../FadeText'
-import { CountUp } from '../CountUp'
-import { useAudio } from 'utils/hooks/useAudio'
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles(() => ({
   root: {
     position: 'absolute',
     top: '40%',
@@ -18,7 +16,7 @@ const script: string[] = [
   'Hi there',
   `I'm here to tell you a story`,
   `About a boy and girl who fell in love`,
-  'It starts a little like this',
+  'It goes a little like this',
 ]
 interface IntroScriptProps {
   onComplete: () => void
@@ -28,7 +26,6 @@ export const IntroScript = ({ onComplete }: IntroScriptProps) => {
   const classes = useStyles()
   const [scriptIndex, setScriptIndex] = useState(0)
   useEffect(() => {
-    console.log(scriptIndex > script.length)
     if (scriptIndex === script.length) onComplete()
   }, [onComplete, scriptIndex])
   return (

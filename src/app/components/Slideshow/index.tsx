@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { makeStyles, Box, Button } from '@material-ui/core'
 import Carousel from 'react-material-ui-carousel'
 import {
